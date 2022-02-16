@@ -1,0 +1,1 @@
+numbers will provide a RESTful api for basic informatin about a number.
