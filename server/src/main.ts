@@ -1,6 +1,7 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 
-
+//setup routers
+const numbersRouter = require('./numbers_router');
 
 const app: Express = express();
 app.use(express.json());
@@ -14,6 +15,8 @@ app.use(function(inRequest: Request, inResponse: Response, inNext: NextFunction)
   inNext();
 });
 
+//use numbers router for all numbers requests
+app.use("/numbers", numbersRouter);
 
 // Start app listening.
 const port = process.env.PORT || 80;
