@@ -3,5 +3,5 @@
 /server/node_modules
 /documentation/notes.txt
 
-
+launch.json
 npm-debug.log*
