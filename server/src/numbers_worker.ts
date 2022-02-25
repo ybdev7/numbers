@@ -88,7 +88,7 @@ export class NumbersWorker {
                 if (isNaN(_num))
                     throw new Error('Please provide a number');
                 
-                const info : IFactsInfo = { _number: _num, facts:getFacts(_num)};
+                const info : IFactsInfo = { _number: _num, facts:NumbersWorker.getFacts(_num)};
                 inResolve(info);
            }
             catch(error: any)
@@ -98,15 +98,26 @@ export class NumbersWorker {
             }
       });
     }
+
+    private static getFacts(_num: number): IFunFact[] | undefined {
+
+        try {
+        return [new PrimeFact(_num), new PSFact(_num)];
+        }
+        catch(e)
+        {
+            throw( new Error("Error getting facts"));
+        }
+    }
 }
 
-function getFacts(_num: number): IFunFact[] | undefined {
+// function getFacts(_num: number): IFunFact[] | undefined {
 
-    try {
-    return [new PrimeFact(_num), new PSFact(_num)];
-    }
-    catch(e)
-    {
-        throw( new Error("Error getting facts"));
-    }
-}
+//     try {
+//     return [new PrimeFact(_num), new PSFact(_num)];
+//     }
+//     catch(e)
+//     {
+//         throw( new Error("Error getting facts"));
+//     }
+// }

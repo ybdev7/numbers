@@ -18,7 +18,7 @@ export interface IPrimeFact extends IFunFact
  */
 export interface IPSFact extends IFunFact
 {
-    refrectSquare: number;
+    perfectSquare: number;
 }
 
 export class PrimeFact implements IPrimeFact 
@@ -77,12 +77,12 @@ export class PrimeFact implements IPrimeFact
 
 export class PSFact implements IPSFact 
 {
-     refrectSquare : number;
+     perfectSquare : number;
      src : number;
         
     constructor(srcNumber:number)
     {
-        this.refrectSquare = this.getPS(srcNumber);
+        this.perfectSquare = this.getPS(srcNumber);
         this.src = srcNumber;
     }
 
@@ -92,7 +92,7 @@ export class PSFact implements IPSFact
 
         return (srcNumber - Math.pow(_sPS, 2) < Math.pow(_lPS,2) - srcNumber) ? Math.pow(_sPS, 2): Math.pow(_lPS,2);
     }
-    public toString = () : string => { return `The closest perfect square number to ${this.src} is ${this.refrectSquare}`;}
+    public toString = () : string => { return `The closest perfect square number to ${this.src} is ${this.perfectSquare}`;}
     
 };
 
