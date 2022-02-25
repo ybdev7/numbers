@@ -2,6 +2,7 @@
 /server/dist
 /server/node_modules
 /documentation/notes.txt
+/server/coverage
 
 launch.json
 npm-debug.log*
