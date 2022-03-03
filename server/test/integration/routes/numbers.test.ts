@@ -14,13 +14,13 @@ describe('numbers routes', () => {
   });
 
   it('Should return the info for number 7', async () => {
-    const { body: data } = await agent.get('/numbers/7').expect(200);
+    const { body: data } = await agent.get('/numbers/info/7').expect(200);
     expect(data?._number).toEqual(7);
     expect(data?.divisors.length).toEqual(2);
   });
 
   it('Should return the info for a random number ', async () => {
-    const { body: data } = await agent.get('/numbers/').expect(200);
+    const { body: data } = await agent.get('/numbers/random/').expect(200);
     expect(data?._number).toBeDefined();
     expect(data?._number).toBeGreaterThanOrEqual(0);
   });

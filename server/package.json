@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "node ./node_modules/nodemon/bin/nodemon.js -e ts --exec \"npm run compile\"",
-    "compile": "npx tsc && node ./dist/main.js",
+    "compile": "npx tsc && node ./dist/src/main.js",
     "test": "jest --coverage --detectOpenHandles --maxWorkers=1",
-    "start": "node ./dist/main.js"
+    "start": "node ./dist/src/main.js"
   },
   "author": "",
   "license": "ISC",
