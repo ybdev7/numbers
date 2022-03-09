@@ -4,5 +4,8 @@
 /documentation/notes.txt
 /server/coverage
 
+
+/client/node_modules
+
 launch.json
 npm-debug.log*
