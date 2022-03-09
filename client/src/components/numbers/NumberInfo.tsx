@@ -35,7 +35,7 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
           </>
         )}
         {!loading && info && (
-          <Card sx={{ minWidth: 300, maxWidth: 800 }}>
+          <Card sx={{ margin: 2, width: "90%" }}>
             <CardHeader
               avatar={<Avatar aria-label="facts">{num}</Avatar>}
               title={`${num} Number Facts`}
@@ -43,9 +43,9 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
             <CardContent>
               <Typography>Prime: {info.isPrime ? "Yes" : "No"}</Typography>
               <Typography>Even: {info.isEven ? "Yes" : "No"}</Typography>
-              <Typography>Divisors: {info.divisors?.join(",")}</Typography>
-              {info.funFacts?.map((fact) => (
-                <Typography>{fact}</Typography>
+              <Typography>Divisors: {info.divisors?.join(", ")}</Typography>
+              {info.funFacts?.map((fact, index) => (
+                <Typography key={"funFact" + index}>{fact}</Typography>
               ))}
             </CardContent>
           </Card>
