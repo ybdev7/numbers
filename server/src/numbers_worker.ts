@@ -49,11 +49,13 @@ export class NumbersWorker {
         if (isNaN(_num)) throw new Error('Please provide a number');
 
         const divisors = NumbersWorker.getDivisors(_num);
+        const funFacts = NumbersWorker.getFacts(_num)?.map((f) => f.toString());
         const info: INumberInfo = {
           _number: _num,
           isEven: _num % 2 == 0,
           isPrime: divisors.length <= 2,
-          divisors: divisors
+          divisors: divisors,
+          funFacts: funFacts
         };
         inResolve(info);
       } catch (error: any) {
