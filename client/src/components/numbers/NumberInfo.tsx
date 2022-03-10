@@ -6,6 +6,8 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { INumberInfo, NumbersWorker } from "../../utils/NumbersWorker";
 import LoadingBox from "../errors/LoadingBox";
+import { AxiosError } from "axios";
+import ErrorBox from "../errors/ErrorBox";
 
 interface INumberInfoProps {
   num: number;
@@ -14,13 +16,25 @@ interface INumberInfoProps {
 const NumberInfo = ({ num }: INumberInfoProps) => {
   const [info, setInfo] = useState<INumberInfo>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [error, setError] = useState<Error | AxiosError | null>(null);
 
   useEffect(() => {
     setLoading(true);
-    new NumbersWorker().geNumberInfo(num).then((response) => {
-      setInfo(response);
-      setLoading(false);
-    });
+    setIsError(false);
+    setError(null);
+
+    new NumbersWorker()
+      .geNumberInfo(num)
+      .then((response) => {
+        setInfo(response);
+        setLoading(false);
+      })
+      .catch((err: Error | AxiosError) => {
+        setLoading(false);
+        setIsError(true);
+        setError(err);
+      });
   }, [num]);
 
   return (
@@ -30,6 +44,11 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
         marginTop={10}
         spacing={{ xs: 1, sm: 2, md: 2 }}
       >
+        {isError && error && (
+          <>
+            <ErrorBox message={"Ooops..."} isShowError error={error} />
+          </>
+        )}
         {loading && (
           <>
             <LoadingBox message="Processing..." />

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { config } from "./config";
 
 export interface INumberInfo {
@@ -16,9 +16,14 @@ export interface INumberInfo {
 
 export class NumbersWorker {
   public async geNumberInfo(num: number): Promise<INumberInfo> {
-    const response: AxiosResponse = await axios.get(
-      `${config.serverAddress}/numbers/info/${num}`
-    );
+    const response: AxiosResponse = await axios
+      .get(`${config.serverAddress}/numbers/info/${num}`)
+      .catch((err: Error | AxiosError) => {
+        console.log(
+          `Error::NumbersWorker.getNumberInfo(${num})::${err.message}`
+        );
+        throw err;
+      });
 
     return response.data;
   }
@@ -27,5 +32,3 @@ export class NumbersWorker {
 export enum ServerAPIsEnum {
   NumberInfo = "numberinfo",
 }
-export const useGetNumberInfo = (num: number) =>
-  new NumbersWorker().geNumberInfo(num);
