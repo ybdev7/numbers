@@ -16,6 +16,7 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoading(true);
     new NumbersWorker().geNumberInfo(num).then((response) => {
       setInfo(response);
       setLoading(false);

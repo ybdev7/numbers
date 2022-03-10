@@ -41,14 +41,16 @@ export class NumbersWorker {
     return new Promise<INumberInfo>((inResolve, inReject) => {
       try {
         //numbers only, no more then 5 charachres long
-        const regex = new RegExp('^[0-9]{1,5}$');
+        const regex = new RegExp('^[0-9]{1,10}$');
         if (typeof num === 'string' && !regex.test(num))
           throw new Error('Please provide a number');
 
         const _num = typeof num === 'string' ? parseInt(num) : num;
         if (isNaN(_num)) throw new Error('Please provide a number');
 
+        console.log('before divisors');
         const divisors = NumbersWorker.getDivisors(_num);
+        console.log('after divisors');
         const funFacts = NumbersWorker.getFacts(_num)?.map((f) => f.toString());
         const info: INumberInfo = {
           _number: _num,
