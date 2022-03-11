@@ -2,7 +2,8 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { Stack } from "@mui/material";
+import { IconButton, Stack } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 interface INumberFormProps {
   updateNumber: (num: number) => void;
@@ -40,7 +41,12 @@ const NumberForm = ({ updateNumber }: INumberFormProps) => {
   };
   return (
     <>
-      <Stack direction={{ xs: "row" }} m={2} spacing={{ xs: 1, sm: 2, md: 2 }}>
+      <Stack
+        justifyContent="center"
+        direction={{ xs: "row" }}
+        m={2}
+        spacing={{ xs: 1, sm: 2, md: 2 }}
+      >
         <TextField
           fullWidth
           error={!validateInput()}
@@ -55,9 +61,13 @@ const NumberForm = ({ updateNumber }: INumberFormProps) => {
             }
           }}
         ></TextField>
-        <Button disabled={!validateInput() || input === ""} onClick={handleGo}>
-          Go
-        </Button>
+        <IconButton
+          color="primary"
+          disabled={!validateInput() || input === ""}
+          onClick={handleGo}
+        >
+          <SendIcon />
+        </IconButton>
       </Stack>
     </>
   );

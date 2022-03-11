@@ -1,13 +1,16 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar, CardHeader } from "@mui/material";
+import { Avatar, CardHeader, useTheme } from "@mui/material";
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { INumberInfo, NumbersWorker } from "../../utils/NumbersWorker";
 import LoadingBox from "../errors/LoadingBox";
 import { AxiosError } from "axios";
 import ErrorBox from "../errors/ErrorBox";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import { blue } from "@mui/material/colors";
+import { ThemeContext } from "@emotion/react";
 
 interface INumberInfoProps {
   num: number;
@@ -18,6 +21,7 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [error, setError] = useState<Error | AxiosError | null>(null);
+  const theme = useTheme();
 
   useEffect(() => {
     setLoading(true);
@@ -46,7 +50,11 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
       >
         {isError && error && (
           <>
-            <ErrorBox message={"Ooops..."} isShowError error={error} />
+            <ErrorBox
+              message={"Ooops...Numbers App has encountered an error:"}
+              isShowError
+              error={error}
+            />
           </>
         )}
         {loading && (
@@ -54,11 +62,22 @@ const NumberInfo = ({ num }: INumberInfoProps) => {
             <LoadingBox message="Processing..." />
           </>
         )}
-        {!loading && info && (
+        {!loading && !isError && info && (
           <Card sx={{ margin: 2, width: "90%" }}>
             <CardHeader
-              avatar={<Avatar aria-label="facts">{num}</Avatar>}
-              title={`${num} Number Facts`}
+              sx={{
+                bgcolor: theme.palette.primary.light,
+              }}
+              avatar={
+                <Avatar
+                  variant="square"
+                  aria-label="facts"
+                  sx={{ bgcolor: theme.palette.primary.main }}
+                >
+                  <CalculateIcon />
+                </Avatar>
+              }
+              title={`Number Facts for ${num} `}
             />
             <CardContent>
               <Typography>Prime: {info.isPrime ? "Yes" : "No"}</Typography>
